@@ -1,0 +1,37 @@
+subscriptions = [("New York Times", 8), ("Wall Street Journal", 10), ("Financial Times", 9)]
+
+def find_combinations(budget, subscriptions):
+
+if budget <= 0:
+return []
+
+
+if budget < min([subscription[1] for subscription in subscriptions]):
+return []
+
+
+combinations = []
+
+
+for subscription in subscriptions:
+# get the name and cost of the subscription
+name, cost = subscription
+
+
+for combination in find_combinations(budget - cost, subscriptions):
+# add the current subscription to the combination and append the resulting list to the combinations list
+combinations.append([name] + combination)
+
+
+return combinations
+
+
+budget = int(input("Enter your weekly budget: "))
+
+
+combinations = find_combinations(budget, subscriptions)
+
+
+print("Possible combinations:")
+for combination in combinations:
+print(combination)
